@@ -13,18 +13,25 @@ class BenfordsLaw{
         Scanner reader = new Scanner(System.in);
         int userMenuChoice = 0; // User selected option in the menu
         boolean exit = false;
+        //int[] sales = new int[x]; --> Need a plan to get this to my method analyzeData
 
         while (!exit){
             printMenu();
-            userMenuChoice = reader.nextInt();
 
-            if (userMenuChoice == 3){ // read sales data
+            System.out.print("Type in your choice: ");
+            userMenuChoice = reader.nextInt();
+            System.out.println();
+
+            if (userMenuChoice == 3){ // Read and loads sales data
                 // method here
             }
-            else if (userMenuChoice == 4){ // check for fruad
+            else if (userMenuChoice == 4){ // Check for fruad and generate graph
                 analyzeData();
             }
-            else if (userMenuChoice == 9){ // exit system
+            else if (userMenuChoice == 5){ // Export digit frequency in .csv
+                // method here
+            }
+            else if (userMenuChoice == 9){ // Exit system
                 exit = true;
                 print("Exiting system...");
             }
@@ -79,8 +86,9 @@ class BenfordsLaw{
 
         System.out.println(); // I'm going to use System.out.println(); for empty lines
 
-        print("3. Read sales data (Report on total sales data)");
-        print("4. Analze data for fraud (Check for fruad in sales data)");
+        print("3. Read sales data (Load sales data)");
+        print("4. Analze data for fraud (Generate graph and digit frequency)");
+        print("5. Export digit frequency to .csv");
         print("9. Quit");
         print("-----------------------");
     }
