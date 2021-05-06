@@ -22,7 +22,7 @@ class BenfordsLaw{
                 // method here
             }
             else if (userMenuChoice == 4){ // check for fruad
-                // method here
+                analyzeData();
             }
             else if (userMenuChoice == 9){ // exit system
                 exit = true;
@@ -39,6 +39,38 @@ class BenfordsLaw{
 
     /*
      * Author: Carl Wang
+     * Method saves me from typing System.out.println(); because I'm lazy
+     * 
+     * @param String line - A string that will be printed
+     * */
+    public static void print (String line){
+        System.out.println(line);
+    }
+
+    /*
+     * Author: Carl Wang
+     * Method prints out an array of values - INTEGER ARRAY
+     * 
+     * @param int[] arr - Integer array with data
+     * */
+    public static void printArr (int[] arr){
+        for (int i = 0; i < arr.length; i++){
+            System.out.println(i);
+        }
+    }
+
+    /*
+     * Author: Carl Wang
+     * The "main base of operations" for analyzing the sales data
+     * 
+     * @param ------------------------------------------------------------
+     * */
+    public static void analyzeData (){
+
+    }
+
+    /*
+     * Author: Carl Wang
      * Method displays a main menu for the user
      * */
     public static void printMenu(){
@@ -51,15 +83,5 @@ class BenfordsLaw{
         print("4. Analze data for fraud (Check for fruad in sales data)");
         print("9. Quit");
         print("-----------------------");
-    }
-
-    /*
-     * Author: Carl Wang
-     * Method saves me from typing System.out.println(); because I'm lazy
-     * 
-     * @param String line - A string that will be printed
-     * */
-    public static void print (String line){
-        System.out.println(line);
     }
 }
