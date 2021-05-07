@@ -13,7 +13,8 @@ class BenfordsLaw{
         Scanner reader = new Scanner(System.in);
         int userMenuChoice = 0; // User selected option in the menu
         boolean exit = false;
-        //int[] sales = new int[x]; --> Need a plan to get this to my method analyzeData
+        int[] sales = new int[0]; // --> Need a plan to get this to my method analyzeData
+        double[] digitFreq = new double[10];
 
         while (!exit){
             printMenu();
@@ -26,7 +27,7 @@ class BenfordsLaw{
                 // method here
             }
             else if (userMenuChoice == 4){ // Check for fruad and generate graph
-                analyzeData();
+                analyzeData(digitFreq, sales);
             }
             else if (userMenuChoice == 5){ // Export digit frequency in .csv
                 // method here
@@ -72,7 +73,7 @@ class BenfordsLaw{
      * 
      * @param ------------------------------------------------------------
      * */
-    public static void analyzeData (){
+    public static void analyzeData (double[] digitFreq, int[] sales){
 
     }
 
