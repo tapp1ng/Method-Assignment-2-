@@ -1,4 +1,3 @@
-
 /*
  * Date: 2021.5.5
  * Teacher: Mr Ho
@@ -8,13 +7,19 @@
 
 import java.util.Scanner;
 import org.jfree.ui.RefineryUtilities; 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 class BenfordsLaw{
     public static void main (String[] args){
         Scanner reader = new Scanner(System.in);
         int userMenuChoice = 0; // User selected option in the menu
         boolean exit = false;
-        int[] sales = new int[0]; // Please fill this array up with the data from the csv!
+        
+        ArrayList<Integer> sales;
+        sales = new ArrayList<Integer>(); // Please fill this array up with the data from the csv!
 
         double[] digitFreq = new double[10];
         /*
@@ -40,7 +45,8 @@ class BenfordsLaw{
             System.out.println();
 
             if (userMenuChoice == 3){ // Read and loads sales data
-                // method here
+              loadData(sales);
+              loadedSales = true;
             }
             else if (userMenuChoice == 4){ // Check for fruad and generate graph
                 if (!loadedSales){
@@ -101,7 +107,7 @@ class BenfordsLaw{
      * @param double[] digitFreq - The digit frequency
      * @param Scanner reader - Reader from main
      * */
-    public static void analyzeData (double[] digitFreq, int[] sales, Scanner reader){
+    public static void analyzeData (double[] digitFreq, ArrayList<Integer> sales, Scanner reader){
         int userChoice = 0;
 
         populateFreq(digitFreq, sales);
@@ -160,9 +166,9 @@ class BenfordsLaw{
      * @param int[] sales - an int array containg all the sales information
      * @paramd double[] digitFreq - The digit frequency
      * */
-    public static void populateFreq (double[] digitFreq, int[] sales){
-        for (int  i = 0; i < sales.length; i++){
-            int digit = extractFirstNum(sales[i]); // Takes the first digit from the sales array index
+    public static void populateFreq (double[] digitFreq, ArrayList<Integer> sales){
+        for (int  i = 0; i < sales.size(); i++){
+            int digit = extractFirstNum(sales.get(i)); // Takes the first digit from the sales array index
             
             for (int j = 0; j < 10; j++){ // Adds 1 to the the digitFreq index, following legend
                 
@@ -175,7 +181,7 @@ class BenfordsLaw{
         }
 
         for (int i = 0; i < digitFreq.length; i++){ // Converts the indexes into precents
-            digitFreq[i] /= sales.length;
+            digitFreq[i] /= sales.size();
             digitFreq[i] *= 100;
             digitFreq[i] = Math.rint(digitFreq[i]); // Rounds to nearest whole number
         }
@@ -206,4 +212,35 @@ class BenfordsLaw{
         RefineryUtilities.centerFrameOnScreen(chart); // The GUI window will be centered when initalized
         chart.setVisible(true);
     }
+    /*
+     * Author: Vincent Nguyen
+     * Description: Method that loads the sales data into an array
+     * @param sales: the array that saves all the data
+     * */
+    
+    public static void loadData (ArrayList<Integer> salesData) throws IOException {
+      int value = 0;
+      int lineCounter = 0;
+      String fileName = "sales.csv";
+      BufferedReader reader = new BufferedReader(new FileReader(fileName));
+      String lineNum = reader.readLine();
+      //skipping the first line of the file
+      lineNum = reader.readLine();
+      int counter = 1;
+      while(lineNum != null) {
+        //making it save in array
+        if (lineNum.contains(",")) {
+          //getting only the numbers and not the postal code
+          
+          value = Integer.parseInt(lineNum.substring(4));
+          salesData.add(new Integer(value));
+        }
+        lineNum = reader.readLine();
+      }
+      reader.close();
+    }
 }
+
+      
+
+
