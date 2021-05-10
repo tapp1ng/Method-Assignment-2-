@@ -213,7 +213,8 @@ class BenfordsLaw{
      * 
      * @paramd double[] digitFreq - The digit frequency
      * */
-    public static void displayGraph(double[] digitFreq){
+    public static void displayGraph (double[] digitFreq){
+        print("Note: Closing the bar chart generator will end the program.");
         BarChart chart = new BarChart(
             "Bar Graph Generator",
             digitFreq
