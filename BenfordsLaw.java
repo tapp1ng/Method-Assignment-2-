@@ -10,6 +10,10 @@ import java.util.Scanner;
 import org.jfree.ui.RefineryUtilities; 
 
 class BenfordsLaw{
+    /*
+     * @Author - Carl Wang
+     * Main of program
+     * */
     public static void main (String[] args){
         Scanner reader = new Scanner(System.in);
         int userMenuChoice = 0; // User selected option in the menu
@@ -196,6 +200,12 @@ class BenfordsLaw{
         }
     }
 
+    /*
+     * @Author: Carl Wang
+     * Method displays the bar chart of digit frequency
+     * 
+     * @paramd double[] digitFreq - The digit frequency
+     * */
     public static void displayGraph(double[] digitFreq){
         BarChart chart = new BarChart(
             "Bar Graph Generator",
