@@ -116,7 +116,7 @@ class BenfordsLaw{
      * @Author: Carl Wang
      * The "main base of operations" for analyzing the sales data
      * 
-     * @param int[] sales - an int array containg all the sales information
+     * @param ArrayList<Integer> sales - an int arraylist containg all the sales information
      * @param double[] digitFreq - The digit frequency
      * @param Scanner reader - Reader from main
      * */
@@ -161,7 +161,7 @@ class BenfordsLaw{
      * @Author: Carl Wang
      * Extracts and returns the first digit of a string
      * 
-     * @param int[] sales - an int array containg all the sales information
+     * @param ArrayList<Integer> sales - an int arraylist containg all the sales information
      * */
     public static int extractFirstNum (int num){
         String digit = Integer.toString(num); // Converts parameter received to string
@@ -176,7 +176,7 @@ class BenfordsLaw{
      * Method fills the digit freq array with data based on the sales
      * Method converts the digit freq into percents, rounded to the nearest whole number
      * 
-     * @param int[] sales - an int array containg all the sales information
+     * @param ArrayList<Integer> sales - an int arraylist containg all the sales information
      * @paramd double[] digitFreq - The digit frequency
      * */
     public static void populateFreq (double[] digitFreq, ArrayList<Integer> sales){
@@ -219,7 +219,7 @@ class BenfordsLaw{
      * @Author: Carl Wang
      * Method displays the bar chart of digit frequency
      * 
-     * @paramd double[] digitFreq - The digit frequency
+     * @param double[] digitFreq - The digit frequency
      * */
     public static void displayGraph (double[] digitFreq){
         print("Note: Closing the bar chart generator will end the program.");
