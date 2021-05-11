@@ -52,6 +52,7 @@ class BenfordsLaw{
 
             if (userMenuChoice == 3){ // Read and loads sales data
               loadData(sales);
+              print("Sales data loaded!");
               loadedSales = true;
             }
             else if (userMenuChoice == 4){ // Check for fruad and generate graph
