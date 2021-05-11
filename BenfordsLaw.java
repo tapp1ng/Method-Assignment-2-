@@ -65,7 +65,7 @@ class BenfordsLaw{
                 }
             }
             else if (userMenuChoice == 5){ // Export digit frequency in .csv
-              if (analyzedData = false) {
+              if (analyzedData == false) {
                 print("Please analyze the data first!");
             }
               else {
