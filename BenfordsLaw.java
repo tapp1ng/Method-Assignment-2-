@@ -11,19 +11,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.File;
 
 class BenfordsLaw{
-    /*
-     * @Author - Carl Wang
-     * Main of program
-     * */
-    public static void main (String[] args) throws IOException{
+      /*@Author - Carl Wang
+       * Main of program
+       * */
+      public static void main (String[] args) throws IOException{
         Scanner reader = new Scanner(System.in);
         int userMenuChoice = 0; // User selected option in the menu
         boolean exit = false;
         
         ArrayList<Integer> sales;
-        sales = new ArrayList<Integer>(); // Please fill this array up with the data from the csv!
+        sales = new ArrayList<Integer>(); 
 
         double[] digitFreq = new double[10];
         /*
@@ -39,7 +40,8 @@ class BenfordsLaw{
         [9] - digit freq of 9
         */
         
-        boolean loadedSales = false; // --> For your load method, do you think you can have it return true once the user loads data into array?
+        boolean loadedSales = false; 
+        boolean analyzedData = false; //needed to properly export results to csv file
 
         while (!exit){
             printMenu();
@@ -50,7 +52,6 @@ class BenfordsLaw{
 
             if (userMenuChoice == 3){ // Read and loads sales data
               loadData(sales);
-              print("Sales data loaded!");
               loadedSales = true;
             }
             else if (userMenuChoice == 4){ // Check for fruad and generate graph
@@ -59,10 +60,17 @@ class BenfordsLaw{
                 }
                 else{
                     analyzeData(digitFreq, sales, reader);
+                    analyzedData = true;
                 }
             }
             else if (userMenuChoice == 5){ // Export digit frequency in .csv
-                // method here
+              if (analyzedData = false) {
+                print("Please analyze the data first!");
+            }
+              else {
+                createPercentagesFile();
+                writeToPercentagesFile(digitFreq);
+              }
             }
             else if (userMenuChoice == 9){ // Exit system
                 exit = true;
@@ -224,26 +232,29 @@ class BenfordsLaw{
         RefineryUtilities.centerFrameOnScreen(chart); // The GUI window will be centered when initalized
         chart.setVisible(true);
     }
-    /*
+   /*
      * Author: Vincent Nguyen
      * Description: Method that loads the sales data into an array
-     * @param sales: the array that saves all the data
+     * @param ArrayList<Integer> salesData: the array that will store the data from the file
      * */
     
     public static void loadData (ArrayList<Integer> salesData) throws IOException {
       int value = 0;
-      int lineCounter = 0;
+     
+      //locating the file and create variables to read through it 
       String fileName = "sales.csv";
       BufferedReader reader = new BufferedReader(new FileReader(fileName));
       String lineNum = reader.readLine();
+      
       //skipping the first line of the file
       lineNum = reader.readLine();
-      int counter = 1;
+      
+      //while loop to contiune until it hits null
       while(lineNum != null) {
-        //making it save in array
+        
+      //if statement to ensure if there is a delimiter
         if (lineNum.contains(",")) {
-          //getting only the numbers and not the postal code
-          
+          //getting only the numbers from the line and not the postal code and putting those numbers into the array
           value = Integer.parseInt(lineNum.substring(4));
           salesData.add(new Integer(value));
         }
@@ -251,8 +262,50 @@ class BenfordsLaw{
       }
       reader.close();
     }
+    /*
+     * Author: Vincent Nguyen
+     * Description: A method that creates a new file
+     * */
+    public static void createPercentagesFile () {
+      try {
+        //creating new file named results.csv
+        File percentageFile =  new File("results.csv");
+        if (percentageFile.createNewFile()) {
+          System.out.println("File Created called: " + percentageFile.getName());
+        }
+        //if the file already exist
+        else {
+          System.out.println("File already exists");
+        }
+      }
+        catch (IOException e) {
+          //if there is an error when creating the file
+          System.out.println("An error has occurred.");
+          e.printStackTrace();
+        }
+    }
+    /*
+     * Author: Vincent Nguyen
+     * Description: Method that writes the data of an array to a file
+     * @param double[] digitFreq: the array that contains the data
+     * */
+    public static void writeToPercentagesFile (double[] digitFreq) {
+      try {
+        //locating the file to write into
+        FileWriter myWriter = new FileWriter("results.csv");
+        //for loop to allow for all index of the digitFreq array to be saved into the file
+        for (int i = 0; i < digitFreq.length; i++) {
+          myWriter.write("The digit frequency of " + i + " is: " + digitFreq[i] + "%");
+          //just skips to the next line in the file for clarity and aesthetic purposes
+          myWriter.write(System.getProperty("line.separator"));
+        }
+        myWriter.close();
+        System.out.println("Successfully wrote to the file");
+      }
+      //if there is an error when creating the file.
+      catch (IOException e) {
+        System.out.println("An error has occurred");
+        e.printStackTrace();
+      }
+    }
 }
-
-      
-
-
